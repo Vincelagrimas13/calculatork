@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="result" readonly>
+        <div class="btn-container">
+            <input type="button" value="C" class="num-btn clear-btn" onclick="clearInput()">
+            <input type="button" value="Del" class="num-btn delete-btn" onclick="deleteLastChar()">
+            <input type="button" value="/" class="num-btn operator-btn" onclick="appendOperator('/')">
+            
+            <input type="button" value="7" class="num-btn" onclick="appendNum(7)">
+            <input type="button" value="8" class="num-btn" onclick="appendNum(8)">
+            <input type="button" value="9" class="num-btn" onclick="appendNum(9)">
+            <input type="button" value="*" class="num-btn operator-btn" onclick="appendOperator('*')">
+            
+            <input type="button" value="4" class="num-btn" onclick="appendNum(4)">
+            <input type="button" value="5" class="num-btn" onclick="appendNum(5)">
+            <input type="button" value="6" class="num-btn" onclick="appendNum(6)">
+            <input type="button" value="-" class="num-btn operator-btn" onclick="appendOperator('-')">
+            
+            <input type="button" value="1" class="num-btn" onclick="appendNum(1)">
+            <input type="button" value="2" class="num-btn" onclick="appendNum(2)">
+            <input type="button" value="3" class="num-btn" onclick="appendNum(3)">
+            <input type="button" value="+" class="num-btn operator-btn" onclick="appendOperator('+')">
+            
+            <input type="button" value="0" class="num-btn" onclick="appendNum(0)">
+            <input type="button" value="." class="num-btn" onclick="appendNum('.')">
+            <input type="button" value="=" class="num-btn equals-btn" onclick="calculate()">
+        </div>
+    </div>
+
+    <script>
+        let currentInput = "";
+
+        function appendNum(number) {
+            currentInput += number;
+            document.getElementById("result").value = currentInput;
+        }
+
+        function appendOperator(operator) {
+            currentInput += operator;
+            document.getElementById("result").value = currentInput;
+        }
+
+        function calculate() {
+            try {
+                const result = eval(currentInput);
+                document.getElementById("result").value = result;
+                currentInput = result.toString();
+            } catch (error) {
+                document.getElementById("result").value = "Error";
+                currentInput = "";
+            }
+        }
+
+        function clearInput() {
+            currentInput = "";
+            document.getElementById("result").value = "";
+        }
+
+        function deleteLastChar() {
+            currentInput = currentInput.slice(0, -1);
+            document.getElementById("result").value = currentInput;
+        }
+    </script>
+</body>
+</html>
